@@ -1,7 +1,7 @@
-# [Your Name] — Portfolio
+# Ylleheidy — Portfolio
 
 ## About Me
-Replace this with a short intro about yourself and your business -->
+As the founder of Vaigu ja Vaha Lugu, I demonstrate a sophisticated mastery of resin, jesmonite, and natural wax, transforming these materials into high-quality design elements that balance Nordic minimalism with playful textures. My commitment to sustainable craftsmanship is evident in my use of ecological materials and artisanal techniques, ensuring that every piece—from crackling wooden-wick candles to intricate epoxy furniture—tells a unique story of quality and durability. Beyond creating aesthetic products, I inspire a creative community by sharing your professional expertise through hands-on workshops, successfully bridging the gap between fine art and practical home decor.
 
 ---
 
