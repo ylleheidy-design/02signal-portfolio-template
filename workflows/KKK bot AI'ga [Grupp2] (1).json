@@ -1,0 +1,212 @@
+{
+  "name": "KKK bot AI'ga [Grupp2]",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Kliendi päring",
+        "formDescription": "Sisesta kliendi küsimus.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Kliendi nimi",
+              "placeholder": "Sisesta kliendi eesnimi",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Küsimuse kategooria",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Üldinfo"
+                  },
+                  {
+                    "option": "Tooted ja hinnad"
+                  },
+                  {
+                    "option": "Tellimused ja tarne"
+                  },
+                  {
+                    "option": "Tagastused ja vahetused"
+                  },
+                  {
+                    "option": "Lojaalsusprogramm"
+                  },
+                  {
+                    "option": "Jätkusuutlikkus"
+                  },
+                  {
+                    "option": "Klienditeenindus"
+                  },
+                  {
+                    "option": "E-pood"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Küsimus",
+              "fieldType": "textarea",
+              "placeholder": "Kirjuta kliendi küsimus siia",
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {
+          "buttonLabel": "Saada päring",
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "Aitäh! Päring on vastu võetud."
+            }
+          }
+        }
+      },
+      "id": "439307cc-d0a0-4aca-9466-41adf7aa5c15",
+      "name": "Form Trigger",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "d3a79dd5-a676-4692-9ab9-3e89ea20e77f"
+    },
+    {
+      "parameters": {
+        "jsCode": "const form = $input.first().json;\n\nconst faq = {\r\n    \"metadata\":  {\r\n                     \"version\":  \"1.0\",\r\n                     \"company\":  \"UrbanStyle.ltd\",\r\n                     \"language\":  \"et\",\r\n                     \"total_questions\":  30,\r\n                     \"usage\":  \"n8n workflow teadmusbaas, Telegram bot, API\",\r\n                     \"last_updated\":  \"2026-04-04\",\r\n                     \"author\":  \"02Signal / Ettevõtluskeskus OÜ\"\r\n                 },\r\n    \"categories\":  [\r\n                       {\r\n                           \"name\":  \"Üldinfo\",\r\n                           \"questions\":  [\r\n                                             {\r\n                                                 \"id\":  1,\r\n                                                 \"question\":  \"Mis on UrbanStyle?\",\r\n                                                 \"answer\":  \"UrbanStyle.ltd on 2020. aastal asutatud Eesti moe- ja jaekaubandusettevõte. Müüme kaasaegset urban-stiilis riietust nii e-poes urbanstyle.ee kui ka neljas füüsilises kaupluses üle Eesti. Meie fookuses on kvaliteetne, jätkusuutlik mood noortele linnainimestele.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  2,\r\n                                                 \"question\":  \"Kus asuvad UrbanStyle\\u0027i kauplused?\",\r\n                                                 \"answer\":  \"Meil on neli kauplust: Tallinna Rotermanni kvartal (flagship, 120 m²), Tartu Tasku keskus (80 m²), Pärnu Port Artur (70 m²) ja Narva Fama keskus (65 m², avatud 2025). Lisaks töötab 24/7 e-pood urbanstyle.ee.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  3,\r\n                                                 \"question\":  \"Millal UrbanStyle asutati ja kes on asutaja?\",\r\n                                                 \"answer\":  \"UrbanStyle asutati 2020. aastal Kristi Tamme poolt. Ettevõte alustas ühe poega Tallinnas ja e-poega. Tänaseks on meil ~55 töötajat ja ~4 miljonit eurot aastakäivet.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  4,\r\n                                                 \"question\":  \"Mis on UrbanStyle\\u0027i missioon?\",\r\n                                                 \"answer\":  \"Meie missioon on tuua Eesti turule kvaliteetset ja jätkusuutlikku moodi taskukohase hinnaga. Usume, et hea stiil ja vastutustundlik tarbimine käivad käsikäes.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  5,\r\n                                                 \"question\":  \"Kes on UrbanStyle\\u0027i sihtgrupp?\",\r\n                                                 \"answer\":  \"Meie peamine sihtgrupp on 18-35-aastased linnaelanikud, kes väärtustavad kvaliteeti, stiili ja jätkusuutlikkust. Meie klient on teadlik tarbija, kes eelistab \\\"slow fashion\\\" lähenemist.\"\r\n                                             }\r\n                                         ]\r\n                       },\r\n                       {\r\n                           \"name\":  \"Tooted ja hinnad\",\r\n                           \"questions\":  [\r\n                                             {\r\n                                                 \"id\":  6,\r\n                                                 \"question\":  \"Milliseid tooteid UrbanStyle müüb?\",\r\n                                                 \"answer\":  \"Müüme naiste riideid (~55% valikust), meeste riideid (~20%, kiiresti kasvav kategooria) ja aksessuaare (~25%). Meie kataloogis on ~350 toodet — riietest kottideni ja ehteteni.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  7,\r\n                                                 \"question\":  \"Kas teil on Eesti disainerite tooteid?\",\r\n                                                 \"answer\":  \"Jah! Umbes 30% meie toodangutest on Eesti disainerite loomingut. Ülejäänud 70% tuleb sertifitseeritud Euroopa tarnijatelt, peamiselt Skandinaaviast ja Baltimaadest.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  8,\r\n                                                 \"question\":  \"Milline on UrbanStyle\\u0027i hinnatase?\",\r\n                                                 \"answer\":  \"Meie hinnad on keskklassis — kvaliteetsed tooted mõistliku hinnaga. Keskmine toote hind on 45-85 EUR. Hooajalised allahindlused on kuni -50%, lojaalsusprogrammi liikmed saavad lisasoodustusi.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  9,\r\n                                                 \"question\":  \"Kuidas leida oma suurust?\",\r\n                                                 \"answer\":  \"Iga toote lehel urbanstyle.ee-s on suurustetabel. Kui oled kahe suuruse vahel, soovitame valida suurem number. Meie kauplustes saad alati proovida — müüjad aitavad hea meelega sobiva suuruse leida.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  10,\r\n                                                 \"question\":  \"Kas tooted on kvaliteetsed ja vastupidavad?\",\r\n                                                 \"answer\":  \"Meie tooted on valitud hoolikalt — töötame ainult sertifitseeritud tarnijatega, kes kasutavad kvaliteetseid materjale. Orgaanilised ja taaskasutatud materjalid moodustavad kasvava osa meie valikust.\"\r\n                                             }\r\n                                         ]\r\n                       },\r\n                       {\r\n                           \"name\":  \"Tellimused ja tarne\",\r\n                           \"questions\":  [\r\n                                             {\r\n                                                 \"id\":  11,\r\n                                                 \"question\":  \"Kuidas tellida e-poest?\",\r\n                                                 \"answer\":  \"Mine urbanstyle.ee, lisa tooted ostukorvi ja vormista tellimus. Aktsepteerime pangalinki, kaarditehinguid ja Montonio järelmaksu. Tellimuse kinnitus tuleb e-mailile kohe.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  12,\r\n                                                 \"question\":  \"Kui kiiresti tellimus kohale jõuab?\",\r\n                                                 \"answer\":  \"Tallinna ja Tartusse 1-2 tööpäeva, mujale Eestisse 2-3 tööpäeva. Paki saad kätte SmartPOST, Omniva või DPD pakiautomaadist. Kullertarne on saadaval Tallinnas ja Tartus.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  13,\r\n                                                 \"question\":  \"Kas tarne on tasuta?\",\r\n                                                 \"answer\":  \"Tarne on tasuta tellimustele alates 60 EUR. Alla selle on tarnekuluks 3.90 EUR pakiautomaadiga ja 5.90 EUR kulleriga. Lojaalsusprogrammi liikmetele on tarne alati tasuta.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  14,\r\n                                                 \"question\":  \"Kas saab tellida ka väljaspoole Eestit?\",\r\n                                                 \"answer\":  \"Jah, tarnime üle Baltikumi — Lätti ja Leetu. Tarneaeg on 3-5 tööpäeva, tarnekulu sõltub sihtkohast (tavaliselt 5-9 EUR). Tulevikus plaanime laieneda ka Soome turule.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  15,\r\n                                                 \"question\":  \"Kuidas jälgida oma tellimust?\",\r\n                                                 \"answer\":  \"Pärast saatmist saad e-mailiga jälgimiskoodi. Selle abil näed reaalajas, kus su pakk on. Kui jälgimiskood ei tööta, kirjuta meile info@urbanstyle.ee.\"\r\n                                             }\r\n                                         ]\r\n                       },\r\n                       {\r\n                           \"name\":  \"Tagastused ja vahetused\",\r\n                           \"questions\":  [\r\n                                             {\r\n                                                 \"id\":  16,\r\n                                                 \"question\":  \"Milline on tagastuspoliitika?\",\r\n                                                 \"answer\":  \"Sul on 30 päeva alates kättesaamisest toote tagastamiseks. Toode peab olema kasutamata, originaalpakendis ja siltidega. Tagastus on tasuta — kasuta kaasas olevat tagastussilti.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  17,\r\n                                                 \"question\":  \"Kuidas vahetada toodet teise suuruse vastu?\",\r\n                                                 \"answer\":  \"Saada meile e-mail aadressile info@urbanstyle.ee soovitud suurusega. Me saadame uue toote kohe, kui vana on teel tagasi. Vahetamine on tasuta.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  18,\r\n                                                 \"question\":  \"Kui kiiresti raha tagasi saab?\",\r\n                                                 \"answer\":  \"Tagasimakse töödeldakse 3-5 tööpäeva jooksul pärast tagastatud toote kättesaamist. Raha laekub samale makseviisile, millega tellimus tehti.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  19,\r\n                                                 \"question\":  \"Kas saab tagastada allahindlusega ostetud tooteid?\",\r\n                                                 \"answer\":  \"Jah, allahindlusega ostetud tooteid saab tagastada tavatingimustel. Tagastatakse tegelik makstud summa. Ainus erand: personaliseeritud või graveeritud aksessuaarid.\"\r\n                                             }\r\n                                         ]\r\n                       },\r\n                       {\r\n                           \"name\":  \"Lojaalsusprogramm\",\r\n                           \"questions\":  [\r\n                                             {\r\n                                                 \"id\":  20,\r\n                                                 \"question\":  \"Mis on UrbanStyle\\u0027i lojaalsusprogramm?\",\r\n                                                 \"answer\":  \"Meie lojaalsusprogramm \\\"UrbanStyle Club\\\" on tasuta liikmelisusega. Liikmed saavad: tasuta tarne, -10% esimeselt ostult, sünnipaevapakkumine, varajane ligipääs uutele kollektsioonidele ja eksklusiivne allahindlus.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  21,\r\n                                                 \"question\":  \"Kuidas liituda lojaalsusprogrammiga?\",\r\n                                                 \"answer\":  \"Liitu veebis urbanstyle.ee/club, kaupluses kassas või tellimuse vormistamisel. Vajad ainult e-maili aadressi. Praegu on meil ~1200 aktiivset liiget.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  22,\r\n                                                 \"question\":  \"Milliseid soodustusi liikmed saavad?\",\r\n                                                 \"answer\":  \"Iga ostu eest kogunevad punktid (1 EUR = 1 punkt). 100 punkti = 5 EUR soodustus. Lisaks: tasuta tarne, varajased juurdepääsud ja sünnipaevapakkumine (-20%).\"\r\n                                             }\r\n                                         ]\r\n                       },\r\n                       {\r\n                           \"name\":  \"Jätkusuutlikkus\",\r\n                           \"questions\":  [\r\n                                             {\r\n                                                 \"id\":  23,\r\n                                                 \"question\":  \"Kuidas UrbanStyle jätkusuutlikkust toetab?\",\r\n                                                 \"answer\":  \"Jätkusuutlikkus on meie põhiväärtus. Töötame ainult sertifitseeritud tarnijatega, kasutame orgaanilisi ja taaskasutatud materjale ning toetame \\\"slow fashion\\\" lähenemist — kvaliteet üle kvantiteedi.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  24,\r\n                                                 \"question\":  \"Mis on ringlussevõtu programm?\",\r\n                                                 \"answer\":  \"Too vana riideese ükskõik millisesse meie kauplusesse ja saa -10% allahindlus järgmiselt ostult. Kogutud rõivad suunatakse taaskasutusse koostöös Eesti heategevusorganisatsioonidega.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  25,\r\n                                                 \"question\":  \"Kas UrbanStyle toetab kogukonda?\",\r\n                                                 \"answer\":  \"Jah! 1% meie käibest läheb Eesti looduskaitse organisatsioonidele. Lisaks toetame kohalikke disainereid ja noori moeloojaid oma platvormiga.\"\r\n                                             }\r\n                                         ]\r\n                       },\r\n                       {\r\n                           \"name\":  \"Klienditeenindus\",\r\n                           \"questions\":  [\r\n                                             {\r\n                                                 \"id\":  26,\r\n                                                 \"question\":  \"Kuidas UrbanStyle\\u0027iga ühendust võtta?\",\r\n                                                 \"answer\":  \"E-mail: info@urbanstyle.ee (vastame 24h jooksul). Telefon: +372 5XX XXXX (E-R 9-18). Instagram DM: @urbanstyle.ee. Kaupluses: meie müüjad aitavad hea meelega.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  27,\r\n                                                 \"question\":  \"Millal on kauplused avatud?\",\r\n                                                 \"answer\":  \"Kõik kauplused on avatud E-L 10:00-20:00 ja P 11:00-18:00. Riigipühadel võivad lahtiolekuajad erineda — vaata urbanstyle.ee/kauplused.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  28,\r\n                                                 \"question\":  \"Kuidas esitada kaebust?\",\r\n                                                 \"answer\":  \"Kirjuta meile info@urbanstyle.ee märksõnaga \\\"Kaebus\\\" või helista. Iga kaebus vaadatakse üle 48 tunni jooksul. Meie eesmärk on leida lahendus, millega oled rahul.\"\r\n                                             }\r\n                                         ]\r\n                       },\r\n                       {\r\n                           \"name\":  \"E-pood\",\r\n                           \"questions\":  [\r\n                                             {\r\n                                                 \"id\":  29,\r\n                                                 \"question\":  \"Kas e-pood on turvaline?\",\r\n                                                 \"answer\":  \"Jah, urbanstyle.ee kasutab SSL-krüpteeringut ja kõik maksed töödeldakse läbi turvaliste makseteenuse pakkujate (Montonio, Stripe). Me ei salvesta su kaardiandmeid.\"\r\n                                             },\r\n                                             {\r\n                                                 \"id\":  30,\r\n                                                 \"question\":  \"Kas saab maksta järelmaksuga?\",\r\n                                                 \"answer\":  \"Jah, pakume Montonio järelmaksu — jaota makse 3-12 kuu peale. Järelmaks on kättesaadav tellimustele alates 30 EUR. Tingimused ja intressimäärad kuvatakse tellimuse vormistamisel.\"\r\n                                             }\r\n                                         ]\r\n                       }\r\n                   ]\r\n};\n\nreturn [\n  {\n    json: {\n      customerName: form['Kliendi nimi'] || '',\n      customerCategory: form['Küsimuse kategooria'] || '',\n      customerQuestion: form['Küsimus'] || '',\n      faq\n    }\n  }\n];"
+      },
+      "id": "afbd6e6f-c2f0-42fe-8ed9-357796e2e75c",
+      "name": "FAQ JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Klient täitis päringu vormi. Koosta Telegrami saadetav lühike ja viisakas eestikeelne vastus FAQ andmete põhjal. Eelista vastamisel kliendi valitud kategooriat, aga vajadusel kasuta ka muud FAQ infot. Kui FAQ ei sisalda piisavat infot, ütle ausalt, et küsimus vajab käsitsi ülevaatamist, ning lisa lühike soovitus järgmise sammu kohta.\n\nKliendi nimi: {{$json.customerName}}\nKüsimuse kategooria: {{$json.customerCategory}}\nKliendi küsimus: {{$json.customerQuestion}}\n\nFAQ JSON:\n{{ JSON.stringify($json.faq, null, 2) }}\n\nVäljund peab olema ainult Telegrami sõnumi tekst. Ära lisa markdown tabelit ega tehnilist selgitust.",
+        "options": {
+          "systemMessage": "Sa oled ettevõtte klienditoe AI agent. Vastad eesti keeles, kasutad ainult antud FAQ infot ning ei mõtle välja fakte. Kui vastust FAQ-st ei leia, ütle seda selgelt ja suuna päring käsitsi ülevaatusele."
+        }
+      },
+      "id": "0d564106-f0f0-403e-80f8-b80332a23f82",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        512,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "model": "llama-3.1-8b-instant",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "35855167-5899-4606-b238-287b648afd05",
+      "name": "Groq Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        512,
+        240
+      ],
+      "credentials": {
+        "groqApi": {
+          "id": "of4trYh4GHjxNVcf",
+          "name": "Minu Groq API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "8234781531",
+        "text": "=📩 Uus kliendi päring\n\nNimi: {{$node[\"FAQ JSON\"].json.customerName}}\nKategooria: {{$node[\"FAQ JSON\"].json.customerCategory}}\nKüsimus: {{$node[\"FAQ JSON\"].json.customerQuestion}}\n\nAI vastus:\n{{$json.output}}",
+        "additionalFields": {
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "47123c58-8830-4f77-959a-108771ca8277",
+      "name": "Saada Telegrami",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        912,
+        0
+      ],
+      "webhookId": "7c7d9fcd-6482-40d7-baa3-6840ac471fcb",
+      "credentials": {
+        "telegramApi": {
+          "id": "EMQbnmWfYUSJiHGE",
+          "name": "Urbanstyle KKK bot"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Form Trigger": {
+      "main": [
+        [
+          {
+            "node": "FAQ JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FAQ JSON": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Saada Telegrami",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "bc02e24b-76c2-47dc-b1c2-24226a6901ac",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5949fab626268d8b88b21dc50348a43b1823770fe66fe1bcebd9d5e1e0dd23d0"
+  },
+  "id": "4KTgG56vZZwRbyU9",
+  "tags": []
+}
