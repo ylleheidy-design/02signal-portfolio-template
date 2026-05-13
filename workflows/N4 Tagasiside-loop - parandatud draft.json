@@ -1,0 +1,611 @@
+{
+  "name": "N4 Tagasiside-loop - parandatud draft",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "UrbanStyle sisubrief",
+        "formDescription": "Sisesta kampaania brief. Demo loob reklaamidrafti ja saadab selle Telegrami kinnitamiseks.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Kampaania nimi",
+              "placeholder": "Kevadkollektsioon",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Kanal",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Instagram"
+                  },
+                  {
+                    "option": "Facebook"
+                  },
+                  {
+                    "option": "Email"
+                  },
+                  {
+                    "option": "Tootekirjeldus"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Tootekategooria",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "naiste riided"
+                  },
+                  {
+                    "option": "meeste riided"
+                  },
+                  {
+                    "option": "aksessuaarid"
+                  },
+                  {
+                    "option": "laste riided"
+                  },
+                  {
+                    "option": "jalanõud"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Sihtrühm",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Tallinn gold kliendid"
+                  },
+                  {
+                    "option": "Tartu silver kliendid"
+                  },
+                  {
+                    "option": "uued e-poe külastajad"
+                  },
+                  {
+                    "option": "jätkusuutliku moe huvilised"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Toon",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "inspireeriv"
+                  },
+                  {
+                    "option": "praktiline"
+                  },
+                  {
+                    "option": "premium"
+                  },
+                  {
+                    "option": "soodne"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Põhisõnum",
+              "fieldType": "textarea",
+              "placeholder": "Jätkusuutlik garderoob kevadeks",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "Loo sisudraft"
+        }
+      },
+      "id": "b03df0f2-aa88-47d5-8c59-c94f195271fc",
+      "name": "Form Trigger - sisubrief",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -304,
+        224
+      ],
+      "webhookId": "2fb5b065-ded2-44a3-b6d6-803547dafb05"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Sisubriefi andmed').item.json.telegramChatId }}",
+        "text": "=UrbanStyle N4 sisudraft\nKampaania: {{ $('Sisubriefi andmed').item.json['Kampaania nimi'] }}\nKanal: {{ $('Sisubriefi andmed').item.json.Kanal }}\nSihtrühm: {{ $('Sisubriefi andmed').item.json['Sihtrühm'] }}\nAI draft:\n{{ $json.output }}\nAnna tagasiside Telegramis:\nPARANDA: [mida muuta]\nNäide: PARANDA: tee lühemaks ja premium-tooniga",
+        "additionalFields": {}
+      },
+      "id": "36000fd3-59a7-45ee-a1c1-83335e9831d6",
+      "name": "Telegram - saada draft",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1536,
+        64
+      ],
+      "webhookId": "e1d15919-7ec2-4685-9115-274581b1644f",
+      "credentials": {
+        "telegramApi": {
+          "id": "EMQbnmWfYUSJiHGE",
+          "name": "Urbanstyle KKK bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Sa oled UrbanStyle.ltd turundusassistent.\nSinu ülesanne on koostada reklaamidraft sisubriefi põhjal.\nKasuta seda konteksti:\nTooted: {{ $json.products_context }}\nKampaania: {{ $json.promotion_context }}\nSihtrühm: {{ $json.segment_context }}\nBrand voice:\n- eesti keel\n- sõbralik, praktiline, inspireeriv\n- väldi liigset müügisurvet\n- ära kasuta üle 2 emoji\n- ära luba infot, mida briefis ei ole\nLoo vastus selles formaadis:\nKANAL:\nPEALKIRI:\nTEKST:\nCTA:\nHASHTAGID:\nKVALITEEDIKONTROLL:\n- Kas sõnum vastab sihtrühmale?\n- Kas CTA on selge?\n- Kas on midagi, mida inimene peab üle kontrollima?",
+        "options": {
+          "systemMessage": "Sa oled UrbanStyle.ltd turundusassistent.\nSinu ülesanne on koostada reklaamidraft sisubriefi põhjal.\nBrand voice:\n- eesti keel\n- sõbralik, praktiline, inspireeriv\n- väldi liigset müügisurvet\n- ära kasuta üle 2 emoji\n- ära luba infot, mida briefis ei ole\nLoo vastus selles formaadis:\nKANAL:\nPEALKIRI:\nTEKST:\nCTA:\nHASHTAGID:\nKVALITEEDIKONTROLL:\n- Kas sõnum vastab sihtrühmale?\n- Kas CTA on selge?\n- Kas on midagi, mida inimene peab üle kontrollima?"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1072,
+        64
+      ],
+      "id": "d1c63b50-82d4-4235-bb1f-ea1d858f7369",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.1-8b-instant",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1072,
+        192
+      ],
+      "id": "17a2f063-6ae4-4e06-8378-0172c731939d",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "of4trYh4GHjxNVcf",
+          "name": "Minu Groq API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1DZjHnazBpJcXN6Mzlm7LEmANlBQc81QhBiMc1MwkkQo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1174819064,
+          "mode": "list",
+          "cachedResultName": "n4_promotions_sample",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DZjHnazBpJcXN6Mzlm7LEmANlBQc81QhBiMc1MwkkQo/edit#gid=1174819064"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "valid_context",
+              "lookupValue": "={{ $('Sisubriefi andmed').item.json.Tootekategooria }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        448,
+        128
+      ],
+      "id": "7ae7cc38-e53e-459c-b7f0-1b5c4ec76e92",
+      "name": "GS Promotions Get Rows",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "rtduMF2dyL8eqo8b",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ZoEuy0oxBXe2deuKgOuPyP_YY3UmzzOn3-0eXe9l2FM",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 878157182,
+          "mode": "list",
+          "cachedResultName": "n4_customer_segments",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZoEuy0oxBXe2deuKgOuPyP_YY3UmzzOn3-0eXe9l2FM/edit#gid=878157182"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "segment_name",
+              "lookupValue": "={{ $('Sisubriefi andmed').item.json['Sihtrühm'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        640,
+        128
+      ],
+      "id": "344559df-2e55-4056-b930-56511ef3b8d0",
+      "name": "GS Segments Get Rows",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "rtduMF2dyL8eqo8b",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1RARoFJiK-HzlrFd72_TUwKXpduQQcwljKqu1IuLVJO0"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 717799923,
+          "mode": "list",
+          "cachedResultName": "n4_products_sample",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1RARoFJiK-HzlrFd72_TUwKXpduQQcwljKqu1IuLVJO0/edit#gid=717799923"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "category",
+              "lookupValue": "={{ $json.Tootekategooria }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        128
+      ],
+      "id": "4aae0b54-6440-4b2a-aee5-fe56bfcb05d8",
+      "name": "GS Products Get Rows",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "rtduMF2dyL8eqo8b",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const brief = $node['Sisubriefi andmed'].json;\n\nfunction allRows(nodeName) {\n  try {\n    return $items(nodeName).map(item => item.json).filter(row => Object.keys(row).length > 0);\n  } catch (error) {\n    return [];\n  }\n}\n\nfunction textFromRows(rows, fallback) {\n  if (!rows.length) return fallback;\n  return rows.slice(0, 3).map((row, index) => {\n    const values = Object.entries(row)\n      .filter(([key, value]) => !key.startsWith('__') && value !== '' && value !== null && value !== undefined)\n      .map(([key, value]) => `${key}: ${value}`)\n      .join(', ');\n    return `${index + 1}. ${values}`;\n  }).join('\\n');\n}\n\nconst productsRows = allRows('Google Sheets - Products Get Rows');\nconst promotionRows = allRows('Google Sheets - Promotions Get Rows');\nconst segmentRows = allRows('Google Sheets - Segments Get Rows');\n\nconst brandVoice = {\n  sihtrühm: 'teadlik moeklient Eesti linnades',\n  toon: 'inspireeriv, praktiline, kvaliteeti rõhutav',\n  sõnad: ['capsule wardrobe', 'jätkusuutlik', 'ajatu', 'mugav'],\n  väldi: ['agressiivne allahindluse surve', 'liiga palju emoji\\'sid'],\n  piirang: 'ära väida, et toode on laos, kui laoinfot pole',\n  cta: 'Vaata kevadkollektsiooni e-poes või külasta lähimat poodi'\n};\n\nreturn [\n  {\n    json: {\n      ...brief,\n      products_context: textFromRows(productsRows, 'Products sheet ei andnud valitud kategooriale ridu. Kasuta ainult vormi briefi ja ära mõtle tooteinfot välja.'),\n      promotion_context: textFromRows(promotionRows, 'Promotions sheet ei andnud kampaaniale ridu. Ära luba allahindlust, tasuta tarnet ega muid kampaania väiteid.'),\n      segment_context: textFromRows(segmentRows, 'Segments sheet ei andnud sihtrühmale ridu. Kasuta ainult vormi sihtrühma nime.'),\n      brandVoice,\n      sheets_lookup_status: {\n        products_rows: productsRows.length,\n        promotion_rows: promotionRows.length,\n        segment_rows: segmentRows.length\n      }\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        864,
+        144
+      ],
+      "id": "86f80ef0-33ad-437e-be80-0ecddfcb99e3",
+      "name": "Koosta AI kontekst Sheets andmetest"
+    },
+    {
+      "parameters": {
+        "content": "N4 SISUDRAFT BOT\n\nSee workflow käivitub Telegrami sõnumist, kasutab N4 andmepakki ja tagastab drafti samasse Telegrami chatti.\n\n1. Vali Telegram Trigger ja Telegram Send node'ides oma Telegram credential.\n2. Vali AI mudeli node'is oma AI credential.\n3. Seadista Google Sheets node: dokument ja sheet nimega Draftid.\n4. Salvesta ja aktiveeri workflow.\n5. Saada botile Telegramis ABI või üks näidispäring.\n\nDraftid salvestuvad Google Sheets'i, kui Sheets node on seadistatud.",
+        "height": 508,
+        "width": 520,
+        "color": 4
+      },
+      "id": "862390d8-ee5c-442b-b352-bd8dd64ccd01",
+      "name": "Kuidas kasutada",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        -448
+      ]
+    },
+    {
+      "parameters": {
+        "content": "NÄIDISPÄRINGUD\n\nABI\n\nSHU: Instagram; Kevadine garderoob; Tallinn gold kliendid\n\nHA: PR-01; SEG-01; naiste riided; premium; ajatu garderoob kontorist nädalavahetuseni\n\nPOSTITUS: Kevadkollektsioon; Instagram; Tallinn gold kliendid; premium toon; ajatu garderoob\n\nEMAIL: E-poe korduvostjad; capsule wardrobe; rahulik toon; CTA: Vaata e-poe valikut\n\nTOOTEKIRJELDUS: Linen Flow kleit; kevadkollektsioon; jätkusuutlik valik\n\nPARANDA: tee viimane draft lühemaks ja vähem müügilikuks",
+        "height": 440,
+        "width": 560,
+        "color": 5
+      },
+      "id": "15ef9bc9-5039-4d1b-ba6b-1272ca590f0e",
+      "name": "Telegram käsud",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        448,
+        -384
+      ]
+    },
+    {
+      "parameters": {
+        "content": "GOOGLE SHEETS: Draftid\n\nLoo Google Sheet tabiga Draftid ja lisa päisesse need veerud:\n\ndraft_id, created_at, source, chat_id, user_name, mode, level, output_kind, raw_message, brief, feedback, previous_draft_id, segment_id, segment_name, segment_city, promotion_id, promotion_name, product_ids, product_names, draft_text, quality_status, data_context\n\nGoogle Sheets node kasutab automaatset mappingut. Kui sheet pole seadistatud, töötab Telegrami vastus edasi, aga salvestus tuleb hiljem ühendada.",
+        "height": 360,
+        "width": 620,
+        "color": 6
+      },
+      "id": "c2822f4b-c0da-4eb4-93f3-d8ee529dc32e",
+      "name": "Google Sheets seadistus",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1008,
+        -352
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst campaign = data['Kampaania nimi'] || 'Kampaania';\nconst channel = data.Kanal || 'Instagram';\nconst category = data.Tootekategooria || 'naiste riided';\nconst segment = data.Sihtrühm || 'UrbanStyle kliendid';\nconst tone = data.Toon || 'inspireeriv';\nconst message = data['Põhisõnum'] || '';\n\nconst title = `${campaign}: ${category} ${segment.toLowerCase()} jaoks`;\nconst body = `Avasta UrbanStyle'i ${category} valik, mis aitab luua ${message.toLowerCase()}. Toon: ${tone}. See on AI loodud mustand, mille turundustiim peab enne avaldamist üle vaatama.`;\nconst cta = channel === 'Email' ? 'Vaata kollektsiooni e-poes' : 'Tutvu kollektsiooniga ja vali oma kevadine lemmik';\nconst hashtags = '#UrbanStyle #JätkusuutlikMood #Kevadkollektsioon';\n\nconst draft = [\n  `PEALKIRI: ${title}`,\n  '',\n  `TEKST: ${body}`,\n  '',\n  `CTA: ${cta}`,\n  '',\n  `HASHTAGID/SUBJECT: ${hashtags}`,\n  '',\n  'KVALITEEDIKONTROLL:',\n  '- Kontrolli, kas kampaania ja tootekategooria on õiged.',\n  '- Kontrolli, kas CTA sobib kanalile.',\n  '- Kontrolli, et tekst ei luba valet laoseisu ega allahindlust.'\n].join('\\n');\n\nconst telegramChatId = 8234781531;\nconst telegramMessage = [\n  'UrbanStyle N4 sisudraft',\n  '',\n  `Kampaania: ${campaign}`,\n  `Kanal: ${channel}`,\n  `Sihtrühm: ${segment}`,\n  '',\n  draft,\n  '',\n  'Tagasiside näide:',\n  'PARANDA: tee lühemaks ja premium-tooniga'\n].join('\\n');\n\nreturn [{ json: { ...data, draft, telegramChatId, telegramMessage } }];"
+      },
+      "id": "85e66591-b211-43d0-aa13-e7c1a3c1f647",
+      "name": "Sisubriefi andmed",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        128
+      ]
+    },
+    {
+      "parameters": {
+        "content": "N4 HA+ TEMPLATE\n\nSee on edasijõudnud lisavoog. Tee see alles siis, kui põhivoog Form -> draft -> Telegram töötab.\n\nEesmärk: kirjutad Telegramis tagasiside ja saad parandatud drafti tagasi.\n\nTee nii:\n1. Vali Telegram Trigger node'is oma Telegram credential.\n2. Vali Telegram saatmise node'is sama credential.\n3. Salvesta ja aktiveeri workflow.\n4. Kirjuta oma botile Telegramis näiteks: PARANDA: tee lühemaks ja vähem müügilikuks.\n5. Kontrolli, kas Telegrami tuleb parandatud draft.\n\nShu-osaleja ei pea seda valmis saama. See on Ha+ harjutus neile, kellel põhivoog juba töötab.",
+        "height": 380,
+        "width": 520,
+        "color": 5
+      },
+      "id": "b4e1c1d9-40b9-4c2a-80c6-034147b63360",
+      "name": "Loe enne Ha+ käivitamist",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "1370ffce-0438-4f9e-a74c-c22a0262015c",
+      "name": "Telegram Trigger - tagasiside",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        320,
+        416
+      ],
+      "webhookId": "02signal-n4-feedback",
+      "credentials": {
+        "telegramApi": {
+          "id": "EMQbnmWfYUSJiHGE",
+          "name": "Urbanstyle KKK bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst message = data.message?.text || '';\nconst chatId = data.message?.chat?.id;\nconst feedback = message.replace(/^PARANDA:\\s*/i, '').trim() || message;\n\nconst previousDraft = 'Näidis algne draft: Avasta UrbanStyle kevadkollektsioon ja leia oma uus lemmik. Vaata e-poodi juba täna! #UrbanStyle #Kevad';\nconst revised = [\n  'PARANDATUD DRAFT',\n  '',\n  'Pealkiri: Kevadine garderoob, mis kestab kauem',\n  '',\n  `Paranduse suund: ${feedback}`,\n  '',\n  'Tekst: UrbanStyle kevadkollektsioon aitab valida ajatuid ja praktilisi lemmikuid, mida saad kanda rohkem kui ühe hooaja. Vaata valikut e-poes ja leia oma järgmine põhieseme lemmik.',\n  '',\n  'CTA: Vaata kevadkollektsiooni',\n  '',\n  'Kontroll: inimene peab enne avaldamist üle vaatama kampaania tingimused ja laoseisu.'\n].join('\\n');\n\nreturn [{ json: { chatId, feedback, previousDraft, revised } }];"
+      },
+      "id": "8b2a540d-00da-4437-8cf2-0f5ae9ad2e29",
+      "name": "Demo - paranda draft tagasiside põhjal",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chatId }}",
+        "text": "={{ $json.revised }}",
+        "additionalFields": {}
+      },
+      "id": "4e5d2da1-4bf5-42df-9866-b61cd78c99de",
+      "name": "Telegram - saada parandatud draft",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        944,
+        416
+      ],
+      "webhookId": "ba9f5447-d521-43b0-9068-4281b07bd782",
+      "credentials": {
+        "telegramApi": {
+          "id": "EMQbnmWfYUSJiHGE",
+          "name": "Urbanstyle KKK bot"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Form Trigger - sisubrief": {
+      "main": [
+        [
+          {
+            "node": "Sisubriefi andmed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Telegram - saada draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GS Promotions Get Rows": {
+      "main": [
+        [
+          {
+            "node": "GS Segments Get Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GS Segments Get Rows": {
+      "main": [
+        [
+          {
+            "node": "Koosta AI kontekst Sheets andmetest",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GS Products Get Rows": {
+      "main": [
+        [
+          {
+            "node": "GS Promotions Get Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Koosta AI kontekst Sheets andmetest": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sisubriefi andmed": {
+      "main": [
+        [
+          {
+            "node": "GS Products Get Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger - tagasiside": {
+      "main": [
+        [
+          {
+            "node": "Demo - paranda draft tagasiside põhjal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Demo - paranda draft tagasiside põhjal": {
+      "main": [
+        [
+          {
+            "node": "Telegram - saada parandatud draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "9e9f6ff5-0248-435f-ac45-1ce427aceb67",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5949fab626268d8b88b21dc50348a43b1823770fe66fe1bcebd9d5e1e0dd23d0"
+  },
+  "id": "IOgbQHHayswLfcsT",
+  "tags": [
+    {
+      "updatedAt": "2026-05-03T05:18:41.488Z",
+      "createdAt": "2026-05-03T05:18:41.488Z",
+      "id": "wgGjesi0zxd91hc2",
+      "name": "02Signal"
+    },
+    {
+      "updatedAt": "2026-05-05T19:10:03.457Z",
+      "createdAt": "2026-05-05T19:10:03.457Z",
+      "id": "sYBAkXvwUM64Koun",
+      "name": "N4"
+    },
+    {
+      "updatedAt": "2026-05-03T20:47:36.594Z",
+      "createdAt": "2026-05-03T20:47:36.594Z",
+      "id": "FGKClHyYh7ER0yL4",
+      "name": "Osaleja template"
+    },
+    {
+      "updatedAt": "2026-05-13T11:28:03.457Z",
+      "createdAt": "2026-05-13T11:28:03.457Z",
+      "id": "b4lBKDfOF74LQ5x3",
+      "name": "Telegram"
+    },
+    {
+      "updatedAt": "2026-05-13T11:28:03.466Z",
+      "createdAt": "2026-05-13T11:28:03.466Z",
+      "id": "LGXjsBaQAu1poXLW",
+      "name": "Google Sheets"
+    },
+    {
+      "updatedAt": "2026-05-05T19:10:03.464Z",
+      "createdAt": "2026-05-05T19:10:03.464Z",
+      "id": "aBvNzeSd7HERXnf9",
+      "name": "Ha+ template"
+    }
+  ]
+}
